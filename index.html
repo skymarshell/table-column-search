@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Table Search</title>
+  <style>
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      border: 1px solid #ddd;
+      text-align: left;
+      padding: 8px;
+    }
+
+    th {
+      background-color: #f4f4f4;
+    }
+
+    input {
+      width: 100%;
+      padding: 6px;
+      box-sizing: border-box;
+    }
+  </style>
+</head>
+<body>
+  <h2>Searchable Table</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>
+          <input type="text" placeholder="Search column 1" oninput="searchTable(0, this.value)">
+        </th>
+        <th>
+          <input type="text" placeholder="Search column 2" oninput="searchTable(1, this.value)">
+        </th>
+        <th>
+          <input type="text" placeholder="Search column 3" oninput="searchTable(2, this.value)">
+        </th>
+      </tr>
+      <tr>
+        <th>Column 1</th>
+        <th>Column 2</th>
+        <th>Column 3</th>
+      </tr>
+    </thead>
+    <tbody id="table-body">
+      <tr>
+        <td>Apple</td>
+        <td>Red</td>
+        <td>Fruit</td>
+      </tr>
+      <tr>
+        <td>Banana</td>
+        <td>Yellow</td>
+        <td>Fruit</td>
+      </tr>
+      <tr>
+        <td>Carrot</td>
+        <td>Orange</td>
+        <td>Vegetable</td>
+      </tr>
+      <tr>
+        <td>Tomato</td>
+        <td>Red</td>
+        <td>Vegetable</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <script>
+    function searchTable(columnIndex, searchValue) {
+      const tableBody = document.getElementById('table-body');
+      const rows = tableBody.getElementsByTagName('tr');
+
+      for (const row of rows) {
+        const cells = row.getElementsByTagName('td');
+        const cellText = cells[columnIndex].textContent.toLowerCase();
+        const searchText = searchValue.toLowerCase();
+
+        if (cellText.includes(searchText)) {
+          row.style.display = '';
+        } else {
+          row.style.display = 'none';
+        }
+      }
+    }
+  </script>
+</body>
+</html>
